@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TopSpin 3.5 pl 4
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= shr-nmr005
+$$ 2017-04-19 14:09:23.571 +0200  EU\shr-nmr005@WPRDBEC60678K8
+$$ X:/NMR005/data/EU-jpikkema/nmr/Apr14-2017/20/pdata/1/outd
+$$ process C:\Bruker\TopSpin3.5pl4\prog\mod\dirdata.exe
+##$CURPLOT= <A4>
+##$CURPRIN= <dconpeaks.txt>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/Canagliflozin ssNMR.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##END=

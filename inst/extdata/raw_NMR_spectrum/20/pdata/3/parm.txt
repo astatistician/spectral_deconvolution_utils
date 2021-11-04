@@ -1,0 +1,45 @@
+
+Current Data Parameters
+NAME         Apr14-2017              
+EXPNO                20              
+PROCNO                1              
+
+F2 - Acquisition Parameters
+Date_          20170419              
+Time              14.09 h            
+INSTRUM           spect              
+PROBHD   H13529_0007 (P              
+PULPROG           hpdec              
+TD                 2048              
+SOLVENT           CDCl3              
+NS                 1536              
+DS                    4              
+SWH          150000.000 Hz           
+FIDRES       146.484375 Hz           
+AQ            0.0068267 sec          
+RG                16.16              
+DW                3.333 usec         
+DE                 6.53 usec         
+TE                293.0 K            
+D1          60.00000000 sec          
+P15             1300.00 usec         
+ZGOPTNS                              
+SFO1        470.5493526 MHz          
+NUC1                19F              
+P1                 3.60 usec         
+PLW1       113.00000000 W            
+SFO2        500.1336509 MHz          
+NUC2                 1H              
+CPDPRG[2       spinal64              
+PCPD2              6.50 usec         
+PLW2     0 W            
+PLW12       97.00000000 W            
+
+F2 - Processing parameters
+SI                 8192              
+SF          470.5923770 MHz          
+WDW                  EM              
+SSB      0              
+LB                20.00 Hz           
+GB       0              
+PC                 1.00              

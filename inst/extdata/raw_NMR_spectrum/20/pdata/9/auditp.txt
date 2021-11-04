@@ -1,0 +1,25 @@
+##TITLE= Audit trail, TopSpin 3.5 pl 7
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= shr-nmr005
+$$ C:\u\data\EU-jpikkema\nmr/Apr14-2017/20/pdata/9/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2018-12-21 14:07:26.265 +0100>,<EU\shr-nmr005>,<WPRDBEC60678K8>,<proc1d>,<TopSpin 3.5.7>,
+      <accumulate start offset = 0 scale = 1 ppm
+       2 20 "Apr14-2017" "C:/u/data/EU-jpikkema/nmr"
+       data hash MD5: 8K
+       DE 21 D9 1E 93 44 70 8F 89 8B C9 DB EC AE 54 1D>)
+(   2,<2018-12-21 14:07:26.593 +0100>,<EU\shr-nmr005>,<WPRDBEC60678K8>,<proc1d>,<TopSpin 3.5.7>,
+      <accumulate offset = -0.0940895683350739 scale = -3789.64927191401 ppm
+       2 30 "Mar31-2017" "C:/u/data/EU-jpikkema/nmr"
+       data hash MD5: 8K
+       20 9E FA 9C 1F 46 47 06 F5 78 ED BF 3F 9A D7 02>)
+(   3,<2018-12-21 14:07:26.967 +0100>,<EU\shr-nmr005>,<WPRDBEC60678K8>,<proc1d>,<TopSpin 3.5.7>,
+      <accumulate offset = 0 scale = -1.41781165005249e-007 ppm
+       2 13 "Mar31-2017" "C:/u/data/EU-jpikkema/nmr"
+       data hash MD5: 8K
+       24 6D 3F A2 91 E3 1E 05 0E C3 1B 4C 79 60 46 2D>)
+##END=
+
+$$ hash MD5
+$$ 7F 7B 83 C0 CB 62 76 8A 2B 36 4B 1D 29 9B 94 92

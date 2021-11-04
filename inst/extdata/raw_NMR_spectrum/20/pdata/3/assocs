@@ -1,0 +1,11 @@
+##TITLE= Parameter file, TopSpin 3.5 pl 7
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 4	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= shr-nmr005
+$$ 2017-09-21 16:34:39.545 +0200  EU\shr-nmr005@WPRDBEC60678K8
+$$ C:/u/data/EU-jpikkema/nmr/Apr14-2017/20/pdata/3/assocs
+$$ process C:\Bruker\TopSpin3.5pl7\prog\mod\dataserver.exe
+##$MULTDISP= <C:/u/data/EU-jpikkema/nmr/Mar31-2017/30/pdata/3|C:/u/data/EU-jpikkema/nmr/Mar31-2017/14/pdata/3>
+##END=

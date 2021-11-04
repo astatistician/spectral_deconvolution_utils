@@ -1,0 +1,10 @@
+VTC_REG_PID_SET_CH1=\
+<pid_settings type="probehead">
+   <standard_pid proportional="5.579" integral="59.760" differential="9.960" />
+   <temperature selftune="278.000" min="228.000" max="328.000" />
+   <vta type="2" sensor="2" connected_sensors="2" />
+   <gasflow selftune="600.000" min="540.000" max="660.000" />
+   <bcu_chiller type="1" selftune="2" min="0" max="1000" />
+   <pics checksum="" name=" PH MAS 500WB BL4 X/Y/F-H DVT" />
+   <checksum value="AFD27F29" />
+</pid_settings>
