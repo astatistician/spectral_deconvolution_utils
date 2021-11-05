@@ -9,8 +9,8 @@
 #' @export
 #'
 #' @examples
-#' if (!require(dplyr)) {
-#'   library(dplyr)
+#' if (!require(tidyverse)) {
+#'   library(tidyverse)
 #' }
 #' dat <- results_MS_spectrum %>%
 #'   filter(z == 9 & spectrum_type == "imp") %>%
