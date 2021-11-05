@@ -4,14 +4,18 @@
 \alias{plot_ma}
 \title{MA plot of estimates vs ground truth}
 \usage{
-plot_ma(x, y, ...)
+plot_ma(data, x, y, ..., extra_ellipsis = NULL)
 }
 \arguments{
-\item{x}{numeric, the ground truth (spiked) proportion/ratio values.}
+\item{data}{data Data in longer format containing the mapping variables.}
 
-\item{y}{numeric, estimated mixing proportions/ratios.}
+\item{x}{Bare variable name of the ground truth, i.e. spiked-in proportion.}
 
-\item{...}{expression(s) (don't use ” or "", just quote or rlang::expr) that
+\item{y}{Bare variable name of the estimated proportions.}
+
+\item{...}{Pass additional mappings like colour, symbol, size etc. using bare variable names.}
+
+\item{extra_ellipsis}{expression(s) (don't use ” or "", just quote or rlang::expr) that
 will be evaluated in order to modify the plot (e.g. add new geom, change
 axis labels etc.).}
 }
@@ -23,7 +27,7 @@ if (!require(tidyverse)) {
   library(tidyverse)
 }
 dat <- results_MS_spectrum \%>\%
-  filter(z == 9 & spectrum_type == "imp") \%>\%
-  distinct(ground_truth, scaling_factor)
-plot_ma(x = dat$ground_truth, y = dat$scaling_factor)
+  filter(spectrum_type == "imp") \%>\%
+  distinct(z, ground_truth, scaling_factor)
+plot_ma(dat, x = ground_truth, y = scaling_factor, colour = factor(z))
 }
