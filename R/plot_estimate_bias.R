@@ -3,62 +3,63 @@
 #' Create scatterplot presenting difference between estimates and ground truth,
 #' on absolute, relative, or multiplicatve scale.
 #'
-#' @param x numeric, the ground truth (spiked) proportion/ratio values.
-#' @param y vector or matrix with estimates (columns).
+#' @param data Data in longer format containing the mapping variables.
+#' @param x Bare variable name of the ground truth, i.e. spiked-in proportion.
+#' @param y Bare variable name of the estimated proportions.
 #' @param error_type character, \code{"diff"} shows y-x, \code{"relative diff"}
 #'   100*(y-x)/x, \code{"multiplicative err"} y/x
-#' @param ... to be documented
+#' @param ... Pass additional mappings to \code{ggplot} like colour, symbol, size etc. using bare
+#'   variable names.
 #' @param replicates logical, set to TRUE if there are replicate spectra per
 #'   given spiked-in proportion; as a result, points will be drawn instead of
 #'   lines.
 #' @param smooth logical, add smoothed line using \code{ggplot2::geom_smooth}?
-#'
+#' @param extra_ellipsis expression(s) (don't use ” or "", just quote or
+#'   rlang::expr) that will be evaluated in order to modify the plot (e.g. add
+#'   new geom, change axis labels etc.).
 #' @export
 #'
 #' @examples
-#' #' if (!require(tidyverse)) {
+#' if (!require(tidyverse)) {
 #'   library(tidyverse)
 #' }
-#' # prepare data
 #' dat <- results_MS_spectrum %>%
-#'   filter(spectrum_type == "imp")
-#' ground_truth <- dat %>% distinct(sample, ground_truth) %>% pull(ground_truth)
-#' dat <- dat %>%
+#'   filter(spectrum_type == "imp") %>%
 #'   distinct(sample, z, ground_truth, scaling_factor) %>%
-#'   pivot_wider(id = sample, names_from = "z", values_from = scaling_factor, names_prefix = "z") %>%
-#'   select(-sample)
-#'
+#'   mutate(z = as.factor(z))
 #' # "absolute error", replicated concentrations, smoother line
-#' plot_estimate_bias(x = ground_truth, y = dat, error_type = "diff", replicates = TRUE, smooth = TRUE)
+#' plot_estimate_bias(data = dat, x = ground_truth, y = scaling_factor, error_type = "diff", colour = z, replicates = TRUE, smooth = TRUE)
 
-plot_estimate_bias <- function(x, y, error_type, ..., replicates = FALSE, smooth = FALSE) {
-  y_org <- y
-  y <- as_tibble(y)
-  err_fun <- function(x,y, type){
-    switch(type,
-           "diff" = y-x,
-           "relative diff" = ifelse(x != 0, 100*(y-x)/x, NaN),
-           "multiplicative err" = ifelse(x != 0, y/x, NaN))
-  }
+plot_estimate_bias <- function(data, x, y, error_type, ..., replicates = FALSE, smooth = FALSE, extra_ellipsis = NULL) {
   error_match <- match.arg(error_type, c("diff", "relative diff", "multiplicative err"))
+  if (error_match == "diff") {
+    eval_expr <- expr({{y}}-{{x}})
+  } else if (error_match == "relative diff") {
+    eval_expr <- expr(ifelse({{x}} != 0, 100*({{y}}-{{x}})/{{x}}, NaN))
+  } else if (error_match == "multiplicative err") {
+    eval_expr <- expr(ifelse({{x}} != 0, {{y}}/{{x}}, NaN))
+  }
+  data["err"] <- rlang::eval_tidy(eval_expr, data)
   line_y_intercept <- ifelse(error_match == "multiplicative err", 1, 0)
-  gg_dat <- bind_cols(x = x, y) %>%  pivot_longer(cols = -x, names_to = "group", values_to = "y") %>%
-    mutate(err = err_fun(x, y, error_match), group = as_factor(group))
-  p <- gg_dat %>% ggplot(aes(x = x, y = err)) +
-    geom_point(aes(colour = group), size = 3)
-  if (!replicates) p <- p + geom_line(aes(colour = group))
+  p <- data %>% ggplot(aes(x = {{x}}, y = err, ...)) +
+    geom_point(size = 3)
+  if (!replicates) p <- p + geom_line()
   p <- p +
     geom_hline(yintercept = line_y_intercept, linetype="dashed") +
     theme_bw() +
     scale_x_continuous(breaks = pretty_breaks(n = 8)) +
     scale_y_continuous(breaks = pretty_breaks(n = 8)) +
     labs(x = "true proportion", y = error_match)
-  if (length(unique(gg_dat$group)) <=9) p <- add_deconvolution_palette(p)
-  if (length(y) == 1) p <- p + theme(legend.position = "none")
-  if (smooth) p <- p + geom_smooth(size = 1.2, se = FALSE)
-  add_options <- list(...)
-  for (i in seq_along(add_options)) {
-    p <- p + eval(add_options[[i]])
+  if (!is.null(p$mapping["colour"])) {
+    colour_var <- rlang::quo_get_expr(p$mapping["colour"][[1]]) %>% rlang::sym() %>% rlang::as_string()
+    if (length(unique(data[colour_var])) <=9 & class(data[colour_var]) %in% c("character", "factor"))
+      p <- add_deconvolution_palette(p)
+  }
+  if (smooth) p <- p + geom_smooth(aes(x = {{x}}, y = err, colour = NULL), size = 1.2, se = FALSE)
+  if (!is.null(extra_ellipsis)) {
+    for (i in seq_along(extra_ellipsis)) {
+      p <- p + eval(extra_ellipsis[[i]])
+    }
   }
   p
 }
