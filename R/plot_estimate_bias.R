@@ -50,7 +50,7 @@ plot_estimate_bias <- function(data, x, y, error_type, ..., replicates = FALSE, 
     scale_x_continuous(breaks = pretty_breaks(n = 8)) +
     scale_y_continuous(breaks = pretty_breaks(n = 8)) +
     labs(x = "true proportion", y = error_match)
-  if (!is.null(p$mapping["colour"])) {
+  if (!is.null(pluck(p$mapping, "colour"))) {
     colour_var <- rlang::quo_get_expr(p$mapping["colour"][[1]]) %>% rlang::sym() %>% rlang::as_string()
     if (length(unique(data[colour_var])) <=9 & class(data[colour_var]) %in% c("character", "factor"))
       p <- add_deconvolution_palette(p)
