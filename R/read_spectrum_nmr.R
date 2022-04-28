@@ -84,8 +84,10 @@ read_spectrum_nmr <- function(path, type) {
 
       nspec <- info_out[i, "SI"]
       swp <- info_out[i, "SW_p"] / info_out[i, "SF"]
-      dppm <- swp / (nspec - 1)
+      dppm <- swp / nspec
       ppm <- seq(info_out[i, "OFFSET"], (info_out[i, "OFFSET"] - swp), by = -dppm)
+      # the ppm of last point may not coincide with the sequence right limit
+      ppm <- ppm[1 : nspec]
 
       spec_r <- readBin(paste0(path[i], "/1r"),
         what = "int", n = nspec,
