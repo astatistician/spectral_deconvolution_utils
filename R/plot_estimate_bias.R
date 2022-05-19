@@ -52,7 +52,7 @@ plot_estimate_bias <- function(data, x, y, error_type, ..., replicates = FALSE, 
     labs(x = "true proportion", y = error_match)
   if (!is.null(pluck(p$mapping, "colour"))) {
     colour_var <- rlang::quo_get_expr(p$mapping["colour"][[1]]) %>% rlang::sym() %>% rlang::as_string()
-    if (length(unique(data[colour_var])) <=9 & class(data[colour_var]) %in% c("character", "factor"))
+    if (length(unique(pull(data, colour_var))) <=9 & class(pull(data, colour_var)) %in% c("character", "factor"))
       p <- add_deconvolution_palette(p)
   }
   if (smooth) p <- p + geom_smooth(aes(x = {{x}}, y = err, colour = NULL), size = 1.2, se = FALSE)

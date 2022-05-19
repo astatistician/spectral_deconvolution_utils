@@ -7,20 +7,22 @@
 read_spectrum_nmr(path, type)
 }
 \arguments{
-\item{path}{If type = "spectrum", path should point at the folder with "1r" and "1i" files.
-If type = "fid", the path should be the folder with the "fid" file. type = "text" can not be handled currently.}
+\item{path}{If type = "spectrum", path should point at the folder with "1r"
+and "1i" files. If type = "fid", the path should be the folder with the
+"fid" file. type = "text" can not be handled currently.}
 
-\item{type}{A character vector controlling how the data is loaded, see the \emph{path} argument.}
+\item{type}{A character vector controlling how the data is loaded, see the
+\emph{path} argument.}
 }
 \value{
-List with two elements \itemize{
-\item \emph{data}: another list of a size corresponding to the number of loaded spectra.
-Each element is a complex vector with the name attribute that reflects spectrum's ppm values.
-\item \emph{info}: matrix with acquisition information (OFFSET, SW_p, SF, SI, BYTORDP, NC_proc, FTSIZE). One spectrum per row.
-}
+List with two elements \itemize{ \item \emph{data}: a tibble in long
+format with three variables: signal - signal id, x - ppm value, y - complex
+signal. \item \emph{info}: matrix with acquisition information (signal id,
+OFFSET, SW_p, SF, SI, BYTORDP, NC_proc, FTSIZE). One spectrum per row. }
 }
 \description{
-Vectorized function to read in multiple NMR spectra (acquired using Bruker's equipment) at once.
+Vectorized function to read in multiple NMR spectra (acquired using Bruker's
+equipment) at once.
 }
 \examples{
 path_spectrum <- system.file("extdata", "raw_NMR_spectrum/20/pdata/2", package = "deconvolutionutils")

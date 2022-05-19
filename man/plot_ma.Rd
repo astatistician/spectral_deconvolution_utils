@@ -13,7 +13,7 @@ plot_ma(data, x, y, ..., extra_ellipsis = NULL)
 
 \item{y}{Bare variable name of the estimated proportions.}
 
-\item{...}{Pass additional mappings like colour, symbol, size etc. using bare variable names.}
+\item{...}{Pass additional mappings to \code{ggplot} like colour, symbol, size etc. using bare variable names.}
 
 \item{extra_ellipsis}{expression(s) (don't use ” or "", just quote or rlang::expr) that
 will be evaluated in order to modify the plot (e.g. add new geom, change

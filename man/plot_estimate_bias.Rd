@@ -25,7 +25,8 @@ plot_estimate_bias(
 \item{error_type}{character, \code{"diff"} shows y-x, \code{"relative diff"}
 100*(y-x)/x, \code{"multiplicative err"} y/x}
 
-\item{...}{Pass additional mappings like colour, symbol, size etc. using bare variable names.}
+\item{...}{Pass additional mappings to \code{ggplot} like colour, symbol, size etc. using bare
+variable names.}
 
 \item{replicates}{logical, set to TRUE if there are replicate spectra per
 given spiked-in proportion; as a result, points will be drawn instead of
@@ -33,9 +34,9 @@ lines.}
 
 \item{smooth}{logical, add smoothed line using \code{ggplot2::geom_smooth}?}
 
-\item{extra_ellipsis}{expression(s) (don't use ” or "", just quote or rlang::expr) that
-will be evaluated in order to modify the plot (e.g. add new geom, change
-axis labels etc.).}
+\item{extra_ellipsis}{expression(s) (don't use ” or "", just quote or
+rlang::expr) that will be evaluated in order to modify the plot (e.g. add
+new geom, change axis labels etc.).}
 }
 \description{
 Create scatterplot presenting difference between estimates and ground truth,
